@@ -1,18 +1,34 @@
 import { useState } from 'react';
 
 const Test2 = () => {
-  const [state, setName] = useState({name: "최창환", log: [] });
+  const [state, setState] = useState({ name: "최창환", log: [] });
+
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    if (name === "name") return setName({ ...state, [name]: value, log: [...state.log, value] })
-      setName({ ...state, [name]: value })
-  }
+    if (name === "name") {
+      setState(prevState => ({
+        ...prevState,
+        [name]: value,
+        log: [...prevState.log, value]
+      }));
+    }
+  };
+
   return (
     <div className="App">
-      <input name="name" onChange={onChangeHandler} value={state.name} />
-      {state.log.map((value) => <div> {value}</div>)}
+      <input
+        name="name"
+        onChange={onChangeHandler}
+        value={state.name}
+        placeholder="이름을 입력하세요"
+      />
+      <div>
+        {state.log.map((value, index) => (
+          <div key={index}>{value}</div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default Test2;
