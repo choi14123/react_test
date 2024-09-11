@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logsLender from '../../day1/src/compant/log';
+import Log from "./components/Log";
 
 
 const Test2 = ()=>{
@@ -9,10 +9,9 @@ const Test2 = ()=>{
         setTxt(e.target.value)
         setLogs([...logs, e.target.value])
     }
-
     return <div>
         <input name="text" onChange={onChangeTxt} />
-        {logs.map(logsLender)}
+        {logs.map((str,i)=> <Log i={i} str={str} />)}
     </div>
 }
 
